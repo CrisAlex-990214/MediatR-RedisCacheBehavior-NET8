@@ -2,8 +2,8 @@
 
 namespace CleanArchitecture.Application.Interfaces
 {
-    public interface IDatabaseService
+    public interface IProductRepo
     {
-        User GetUser(int id);
+        Task<IEnumerable<Product>> GetAll();
     }
 }

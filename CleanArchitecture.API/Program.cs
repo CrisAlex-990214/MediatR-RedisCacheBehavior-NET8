@@ -1,19 +1,15 @@
 using CleanArchitecture.Application;
+using CleanArchitecture.Application.Dtos;
 using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddScoped<IProductRepo, ProductRepo>();
+builder.Services.AddApplicationServices();
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddScoped<IDatabaseService, DatabaseService>();
-
-builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 
@@ -24,10 +20,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
+app.MapGet("/", () => Array.Empty<ProductDto>());
 
 app.Run();
