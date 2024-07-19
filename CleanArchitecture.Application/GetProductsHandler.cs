@@ -4,8 +4,9 @@ using MediatR;
 
 namespace CleanArchitecture.Application
 {
-    public class GetProductsRequest : IRequest<IEnumerable<ProductDto>>
+    public class GetProductsRequest : IRequest<IEnumerable<ProductDto>>, ICacheableRequest
     {
+        public string Key => "Products";
     }
 
     public class GetProductsHandler(IProductRepo productRepo)
